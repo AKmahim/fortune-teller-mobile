@@ -3,18 +3,40 @@ import { TypeAnimation } from "react-type-animation";
 import bname from "../../assets/fortune-teller.png";
 import tia from "../../assets/tia.png";
 import logo from "../../assets/logo.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getPredictionByID } from "../../utilities/utilities";
 
 
 const Page3 = () => {
   const [name, setName] = useState("");
+  const [card,setCard] = useState("");
   const [predictionNumber,setPredictionNumber] = useState("");
   const [predictionText,setPredictionText] = useState("");
+  const [cardIdFromURL,setCardIdFromURL] = useState(null);
+  const [viewFromCard,setViewFromCard] = useState(true);
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const cardValue = queryParams.get('card');
+
+  const wrongCardText = "Ops! You Pick The Wrong Card";
+  
+  console.log(cardValue,cardIdFromURL);
+  useEffect(()=>{
+    if(!cardIdFromURL){
+      if(cardIdFromURL === card){
+        setViewFromCard(true);
+      }
+      else{
+        setViewFromCard(false);
+      }
+    }
+  },[])
 
 
   useEffect(() => {
     logMovies();
+    setCardIdFromURL(cardValue);
     
     
 
@@ -27,6 +49,7 @@ const Page3 = () => {
     const movies = await response.json();
     setName(movies.user_name);
     setPredictionNumber(movies.prediction)
+    setCard(movies.card);
     const predictionName = await getPredictionByID(predictionNumber);
     setPredictionText(predictionName);
     
