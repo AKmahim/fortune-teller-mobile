@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
-import bname from "../../assets/Fortune Teller-01.png";
-import tia from "../../assets/tia_00182.png";
-import logo from "../../assets/Break-The-Box-Content.png";
+import bname from "../../assets/fortune-teller.png";
+import tia from "../../assets/tia.png";
+import logo from "../../assets/logo.png";
+import { useNavigate } from "react-router-dom";
+import { getPredictionByID } from "../../utilities/utilities";
+
 
 const Page3 = () => {
   const [name, setName] = useState("");
+  const [predictionNumber,setPredictionNumber] = useState("");
+  const [predictionText,setPredictionText] = useState("");
+
 
   useEffect(() => {
     logMovies();
-  }, []);
+    
+    
+
+  }, [name]);
 
   async function logMovies() {
     const response = await fetch(
@@ -17,11 +26,16 @@ const Page3 = () => {
     );
     const movies = await response.json();
     setName(movies.user_name);
+    setPredictionNumber(movies.prediction)
+    const predictionName = await getPredictionByID(predictionNumber);
+    setPredictionText(predictionName);
+    
   }
+   
 
   return (
     <>
-      <section className="relative bg-[#F4ECE1] bg-[url('/src/assets/zodiac-01-01.png')] bg-cover bg-center bg-no-repeat bgbg bg-fixed">
+      <section className="relative bg-[#F4ECE1] bg-[url('/src/assets/bg-1.png')] bg-cover bg-center bg-no-repeat bgbg bg-fixed">
         <div className="mx-auto max-w-screen-xl px-4  flex h-screen items-center">
           <div className="mx-auto max-w-7xl text-center ">
             <div className="relative mx-auto  mt-20">
@@ -37,14 +51,16 @@ const Page3 = () => {
               />
             </div>
 
-            {console.log(name)}
+            
             {name && (
               <p className="text-3xl my-3 bg-gradient-to-t from-[#400c43] to-[#820d96] bg-clip-text font-extrabold text-transparent">
                 Welcome {name.toLocaleUpperCase()}
               </p>
             )}
 
-            <p className=" w-[100%] textgradient text-xl md:text-3xl lg:text-4xl emad bg-gradient-to-t from-[#eb475c] to-[#fba209] bg-clip-text font-extrabold text-transparent ">
+            {
+              predictionText && (
+                <p className=" w-[100%] textgradient text-xl md:text-3xl lg:text-4xl emad bg-gradient-to-t from-[#eb475c] to-[#fba209] bg-clip-text font-extrabold text-transparent ">
               <TypeAnimation
                 style={{
                   whiteSpace: "pre-line",
@@ -53,11 +69,13 @@ const Page3 = () => {
                 }}
                 className="lg:h-[100px] lg:text-4xl "
                 sequence={[
-                  `“Your horoscope advises you to\n wear pants today. Trust us,it's for the best”`,
+                  predictionText,
                   1000,
                 ]}
               />
             </p>
+              )
+            }
           </div>
         </div>
 
@@ -66,6 +84,7 @@ const Page3 = () => {
           className=" lg:w-24 md:w-20 w-12 absolute bottom-8 right-8"
           alt="logo"
         />
+        
       </section>
     </>
   );
