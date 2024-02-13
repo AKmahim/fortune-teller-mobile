@@ -81,7 +81,7 @@ const Page3 = () => {
 
         <img
           src={logo}
-          className=" lg:w-24 md:w-20 w-12 absolute bottom-8 right-8"
+          className=" lg:w-24 md:w-20 w-12 absolute bottom-8 right-8 element"
           alt="logo"
         />
         
