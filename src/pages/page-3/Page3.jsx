@@ -68,10 +68,10 @@ const Page3 = () => {
       <section className="relative bg-[#F4ECE1] bg-[url('/src/assets/bg-1.png')] bg-cover bg-center bg-no-repeat bgbg bg-fixed">
         <div className="mx-auto max-w-screen-xl px-4  flex h-screen items-center">
           <div className="mx-auto max-w-7xl text-center ">
-            <div className="relative mx-auto  mt-20">
+            <div className="relative mx-auto  mt-10">
               <img
                 src={tia}
-                className="  lg:w-1/3 md:w-1/2 w-[70%] mx-auto emad absolute lg:-top-28 xl:-top-36 md:-top-32 -top-24 right-[47%] "
+                className="  lg:w-1/3 md:w-1/2 w-[70%] mx-auto emad absolute lg:-top-28 xl:-top-36 md:-top-32 -top-20 right-[47%] "
                 alt=""
               />
               <img
@@ -88,14 +88,14 @@ const Page3 = () => {
             )}
             {console.log(wrongMsg)}
             {predictionText && wrongMsg && (
-              <p className=" w-[100%] textgradient text-xl md:text-3xl lg:text-4xl emad bg-gradient-to-t from-[#eb475c] to-[#fba209] bg-clip-text font-extrabold text-transparent ">
+              <p className="py-4 w-[100%] textgradient text-2xl md:text-3xl emad bg-gradient-to-t from-[#eb475c] to-[#fba209] bg-clip-text font-extrabold text-transparent ">
                 <TypeAnimation
                   style={{
                     whiteSpace: "pre-line",
                     height: "100px",
                     display: "block",
                   }}
-                  className="lg:h-[100px] lg:text-4xl "
+                  className="lg:h-[100px] text-3xl "
                   sequence={[predictionText, 1000]}
                 />
               </p>
@@ -126,7 +126,7 @@ const Page3 = () => {
 
         <img
           src={logo}
-          className=" lg:w-24 md:w-20 w-12 absolute bottom-8 right-8 element"
+          className=" lg:w-24 md:w-20 w-12 absolute bottom-12 right-8 element"
           alt="logo"
         />
       </section>
